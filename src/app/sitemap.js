@@ -1,35 +1,21 @@
 export default function sitemap() {
   const baseUrl = "https://freeqrgen.online";
+  const types = ["url", "wifi", "upi", "whatsapp", "email", "phone", "text", "sms", "vcard", "pdf", "image", "video", "barcode"];
 
-  const staticRoutes = [
-    "",
-    "/blog",
-    "/features",
-    "/contact",
-    "/privacy-policy",
-    "/terms",
-    "/about",
-
-    // QR Pages
-    "/qr/url",
-    "/qr/wifi",
-    "/qr/upi",
-    "/qr/whatsapp",
-    "/qr/email",
-    "/qr/phone",
-    "/qr/text",
-    "/qr/sms",
-    "/qr/vcard",
-    "/qr/pdf",
-    "/qr/image",
-    "/qr/video",
-    "/qr/barcode",
-  ];
-
-  return staticRoutes.map((route) => ({
-    url: `${baseUrl}${route}`,
+  const qrRoutes = types.map((type) => ({
+    url: `${baseUrl}/qr/${type}`,
     lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: route === "" ? 1.0 : 0.8,
+    changeFrequency: 'daily', // Change 'weekly' to 'daily'
+    priority: 0.8,
   }));
+
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1,
+    },
+    ...qrRoutes,
+  ];
 }
